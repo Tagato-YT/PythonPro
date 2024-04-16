@@ -27,5 +27,11 @@ async def add(ctx, left: int, right: int):
 async def test(ctx, *args):
     arguments = ', '.join(args)
     await ctx.send(f'{len(args)} arguments: {arguments}')
+    
+@bot.command()
+async def sub(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left - right)
+
 
 bot.run("ADD YOUR TOKEN")
