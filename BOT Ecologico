@@ -1,0 +1,182 @@
+import discord
+from discord.ext import commands
+import os, random
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+Manualidades = [
+    "Robot con cartón y servomotores",
+    "Lámpara con botellas de vidrio",
+    "Caja de música con papel periódico",
+    "Juego de adivinanzas con tapas de botellas",
+    "Reloj de pared con CD viejos",
+    "Marcos de fotos con cartón y papel periódico",
+    "Jardín vertical con botellas de plástico",
+    "Collares con tapones de corcho",
+    "Portavelas con latas de refresco",
+    "Posavasos con CDs reciclados",
+    "Organizador de escritorio con cajas de cartón",
+    "Pintura en piedras recolectadas",
+    "Móviles decorativos con ramas secas",
+    "Bolsas de tela reutilizables",
+    "Candelabros con cubiertos viejos",
+    "Cuadros con tapas de botellas",
+    "Macetas con neumáticos usados",
+    "Mariposas de papel reciclado",
+    "Joyeros con cajas de cartón",
+    "Adornos navideños con cápsulas de café",
+    "Muñecos de tela con retazos",
+    "Llaveros con piezas de lego",
+    "Papel reciclado hecho en casa",
+    "Cestas con periódicos enrollados",
+    "Banderines con camisetas viejas",
+    "Títeres con calcetines desparejados",
+    "Candelabros con tarros de vidrio",
+    "Posavasos con corchos de botellas de vino",
+    "Collares con cápsulas de Nespresso",
+    "Marcapáginas con clips de papel",
+    "Decoración de macetas con cuerdas",
+    "Juguetes para mascotas con camisetas viejas",
+    "Bolsas de regalo con papel de periódico",
+    "Cubiertos decorativos con pintura",
+    "Organizadores de cables con rollos de papel higiénico",
+    "Flores de papel crepé reciclado",
+    "Alfileteros con tapones de corcho",
+    "Cajas de almacenamiento con cajas de cereales",
+    "Collares con cápsulas de refrescos",
+    "Llaveros con chapas de botellas",
+    "Adornos de Navidad con piñas",
+    "Portavelas con latas de conserva",
+    "Pulseras con anillas de latas",
+    "Cajas de regalo con cartón de cajas de zapatos",
+    "Decoración de pared con ramas secas y luces LED",
+    "Juguetes para gatos con cajas de cartón",
+    "Candelabros con palitos de helado",
+    "Marcos de fotos con ramas y cuerda",
+    "Posavasos con CDs reciclados",
+    "Collares con botones",
+    "Organizadores de escritorio con latas de refresco",
+    "Muñecos de nieve con calcetines",
+    "Bolsas de tela con camisetas",
+    "Candelabros con latas de refresco",
+    "Posavasos con corchos de botellas de vino",
+    "Collares con cápsulas de Nespresso",
+    "Marcapáginas con clips de papel",
+    "Decoración de macetas con cuerdas",
+    "Juguetes para mascotas con camisetas viejas",
+    "Bolsas de regalo con papel de periódico",
+    "Cubiertos decorativos con pintura",
+    "Organizadores de cables con rollos de papel higiénico",
+    "Flores de papel crepé reciclado",
+    "Alfileteros con tapones de corcho",
+    "Cajas de almacenamiento con cajas de cereales",
+    "Collares con cápsulas de refrescos",
+    "Llaveros con chapas de botellas",
+    "Adornos de Navidad con piñas",
+    "Portavelas con latas de conserva",
+    "Pulseras con anillas de latas",
+    "Cajas de regalo con cartón de cajas de zapatos",
+    "Decoración de pared con ramas secas y luces LED",
+    "Juguetes para gatos con cajas de cartón",
+    "Candelabros con palitos de helado",
+    "Marcos de fotos con ramas y cuerda"
+]
+
+# ¡Diviértete reciclando y creando con Python!
+
+consejos = [
+    "Separa tus residuos en casa: clasifica papel, plástico, vidrio y orgánicos.",
+    "Reutiliza envases de vidrio o plástico para almacenar alimentos o líquidos.",
+    "Compra productos fabricados con materiales reciclados.",
+    "Reduce el consumo de plástico: evita bolsas y botellas desechables.",
+    "Imprime o fotocopia solo cuando sea necesario.",
+    "Lleva tus propias bolsas reutilizables al supermercado.",
+    "Usa productos de limpieza biodegradables.",
+    "Compra a granel para reducir envases pequeños.",
+    "Repara y da mantenimiento a tus electrodomésticos en lugar de comprar nuevos.",
+    "Comparte o arrienda artículos que se usan con poca frecuencia.",
+    "Cultiva tus propios vegetales en casa.",
+    "Dona objetos en buen estado en lugar de desecharlos.",
+    "Utiliza envoltorios de alimentos reutilizables en lugar de plástico.",
+    "Sal con tu propia botella o termo reutilizable para evitar recipientes desechables.",
+    "Reutiliza materiales para manualidades y decoración.",
+    "Compra productos de segunda mano.",
+    "Evita el exceso de embalaje al comprar regalos.",
+    "Recicla pilas y baterías correctamente.",
+    "Consume productos locales y de temporada.",
+    "Reutiliza papel impreso para tomar notas o hacer listas.",
+    "Haz compost con residuos orgánicos para fertilizar tus plantas.",
+    "Recicla aparatos electrónicos en puntos de recogida especializados.",
+    "Evita productos desechables de un solo uso.",
+    "Reutiliza muebles y objetos antiguos.",
+    "Recicla ropa y textiles en contenedores específicos.",
+    "Participa en campañas de limpieza de playas y parques.",
+    "Infórmate sobre las reglas de reciclaje de tu localidad.",
+    "Apoya iniciativas de reciclaje comunitario.",
+    "Educa a tus amigos y familiares sobre la importancia del reciclaje.",
+    "Compra productos con envases retornables.",
+    "Recicla cartón y papel en contenedores adecuados.",
+    "Reutiliza bolsas de tela para llevar tus compras.",
+    "Recicla latas de aluminio y envases de bebidas.",
+    "Evita el desperdicio de alimentos planificando tus compras y almacenamiento.",
+    "Recicla vidrio en puntos de recogida específicos.",
+    "Reutiliza muebles y objetos antiguos.",
+    "Recicla aceite de cocina usado en centros de recogida especializados.",
+    "Evita el uso de pajitas de plástico.",
+    "Recicla electrodomésticos grandes como neveras y lavadoras.",
+    "Reutiliza cajas y envases para organizar tus pertenencias.",
+    "Recicla bombillas y lámparas en puntos de recogida específicos.",
+    "Evita el uso de productos de limpieza con químicos dañinos para el medio ambiente.",
+    "Recicla plásticos de uso común como botellas y envases.",
+    "Reutiliza ropa y accesorios en lugar de desecharlos.",
+    "Recicla papel de aluminio y papel de cocina limpio.",
+    "Evita el uso de vasos y platos desechables en eventos y fiestas.",
+    "Recicla materiales de construcción como madera y metal.",
+    "Reutiliza muebles y objetos antiguos.",
+    "Recicla pilas y baterías correctamente.",
+    "Evita el uso de productos de belleza con microplásticos.",
+    "Recicla productos electrónicos como teléfonos y tablets.",
+    "Reutiliza bolsas de tela para llevar tus compras.",
+    "Recicla cartuchos de tinta y tóner de impresoras.",
+    "Evita el uso de productos de limpieza con químicos dañinos para el medio ambiente.",
+    "Recicla plásticos de uso común como botellas y envases.",
+    "Reutiliza ropa y accesorios en lugar de desecharlos.",
+    "Recicla papel de aluminio y papel de cocina limpio.",
+    "Evita el uso de vasos y platos desechables en eventos y fiestas."
+]
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hola, soy un bot {bot.user}!')
+
+@bot.command()
+async def Consejo(ctx):
+    random.choice(consejos)
+    await ctx.send(consejos)
+
+
+Imagenlist = os.listdir('Contaminacion')
+@bot.command()
+async def contaminacion(ctx):
+    img_name = random.choice(Imagenlist)
+    with open(f'Contaminacion/{img_name}', 'rb') as f:
+            picture = discord.File(f)
+    await ctx.send(file=picture)
+
+@bot.command()
+async def Manualidades(ctx):
+    ranManuali = random.choice(Manualidades)
+    await ctx.send((Manualidades))
+
+
+
+
+
+
+bot.run(YOUR TOKEN)
